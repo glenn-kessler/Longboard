@@ -1,0 +1,35 @@
+const unsigned short vorwaerts = 4;
+const unsigned short rueckwaerts = 5;
+const unsigned short enable = 6;
+const unsigned short led_intern = 13;
+
+int v= 0;
+int dir= 1;
+
+void setup()
+	{
+  Serial.begin(9600);
+	pinMode(vorwaerts,OUTPUT);
+	pinMode(rueckwaerts,OUTPUT);
+	pinMode(enable,OUTPUT);
+	pinMode(led_intern,OUTPUT);
+	}
+
+void loop()
+	{
+        if (v<1) dir=1;
+        if (v>=255) dir= -1;
+
+         Serial.println(v);
+        
+	digitalWrite(rueckwaerts,LOW);
+	digitalWrite(vorwaerts,HIGH);
+	
+	analogWrite(enable,v);
+        v+= dir;
+        delay(500);
+	
+	digitalWrite(led_intern,LOW);
+
+	}
+
